@@ -20,8 +20,8 @@ public class Producto {
 	}
 	
 	public Producto() {
-		this.pais = origenFabricacion.ARGENTINA;
-		this.objeto = categoria.TELEFONO;
+		this.pais = pais;
+		this.objeto = objeto;
 	
 	}
 
