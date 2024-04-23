@@ -25,6 +25,23 @@ public class Producto {
 	
 	}
 
+	
+	
+	
+	
+	public Producto(int codigo, String descripcion, double precioUnitario, origenFabricacion pais, categoria objeto) {
+		super();
+		this.codigo = codigo;
+		this.descripcion = descripcion;
+		this.precioUnitario = precioUnitario;
+		this.pais = pais;
+		this.objeto = objeto;
+	}
+
+
+
+
+
 	public int getCodigo() {
 		return codigo;
 	}
