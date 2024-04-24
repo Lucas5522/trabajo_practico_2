@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.model;
+package ar.edu.unju.fi.ejercicio1_Model;
 
 public class Producto {
 	private int codigo;

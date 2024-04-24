@@ -1,12 +1,13 @@
-package ar.edu.unju.fi.main;
+package ar.edu.unju.fi.ejercicio1_Main;
 
 
-
-import ar.edu.unju.fi.model.Producto;
-import ar.edu.unju.fi.model.Producto.categoria;
-import ar.edu.unju.fi.model.Producto.origenFabricacion;
 
 import java.util.Scanner;
+
+import ar.edu.unju.fi.ejercicio1_Model.Producto;
+import ar.edu.unju.fi.ejercicio1_Model.Producto.categoria;
+import ar.edu.unju.fi.ejercicio1_Model.Producto.origenFabricacion;
+
 import java.util.ArrayList;
 import java.util.List;
 
