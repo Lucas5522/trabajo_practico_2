@@ -130,7 +130,7 @@ public class Main {
 		}
 		return null;
 	}	
-	
+	 
 	private static categoria getcategoria(String catego) {
 		for(categoria producto : Producto.categoria.values()) {
 			if(Producto.categoria.values().equals(catego)){
