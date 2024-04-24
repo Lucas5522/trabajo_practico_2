@@ -19,7 +19,6 @@ public class Main {
 	public static void main(String[] args) {
 		scanner = new Scanner(System.in);
 		int op;
-		mostrar();
 		do {
 			System.out.println("************************");
 			System.out.println("1-Crear Producto");
@@ -64,13 +63,14 @@ public class Main {
 		String descripcion = scanner.next();
 		System.out.println("Ingrese precio unitario: ");
 		double precio = scanner.nextDouble();
+		mostrar();
 		System.out.println("Ingrese origen de fabricacion: ");
-		System.out.println("Ingrese opcion para origen de fabricacion: ");
 		String orige = scanner.next();
 		origenFabricacion product = getorigenFabricacion(orige);
 		System.out.println("Ingrese categoria del producto: ");
-		String categorias = scanner.next();
-		productos.add(new Producto(codigo, descripcion, precio, product, categoria.TELEFONO));
+		String categor = scanner.next();
+		categoria catego = getcategoria(categor);
+		productos.add(new Producto(codigo, descripcion, precio, product, catego));
 		
 			
 		
@@ -81,31 +81,41 @@ public class Main {
 		System.out.println("*****************************");
 		productos.forEach(d->System.out.println(d));	
 	}
-	
-	
+		
 	
 	public static void modificarProductos() {
-		
-		System.out.println("Igrese pais del producto a modificar");
-		String productoModificado = scanner.next();
+		System.out.println("Igrese codigo del producto a modificar");
+		int productoModificado = scanner.nextInt();
 		for(Producto producto : productos) {
-			if (producto.getPais().equals(productoModificado)) {
+			if (producto.getCodigo() == productoModificado) {
 				System.out.println("Ingrese nuevo codigo: ");
 				int codi= scanner.nextInt();
 				System.out.println("Ingrese nueva descripcion: ");
 				String descrip = scanner.next();
 				System.out.println("Ingrese nuevo precio unitario: ");
 				double prec = scanner.nextDouble();
-				System.out.println("Ingrese opcion para origen de fabricacion: ");
-				String orige = scanner.next();
-				origenFabricacion product = getorigenFabricacion(orige);
-				System.out.println("Ingrese opcion para categoria del producto: ");
-				int catego = scanner.nextInt();
+				System.out.println("  ");
+				mostrar();
+				System.out.println("Ingrese una opcion: ");
+				System.out.println("1-Modificar origen de fabricacion");
+				System.out.println("2-Modificar categoria");
+				int op = scanner.nextInt();
+				if (op == 1) {
+					System.out.println("Ingrese origen de fabricacion: ");
+					String orige = scanner.next();
+					origenFabricacion product = getorigenFabricacion(orige);
+					producto.setPais(product);
+				}else {
+					if (op == 2) {
+						System.out.println("Ingrese categoria del producto: ");
+						String catego = scanner.next();
+						categoria categoria = getcategoria(catego);
+						producto.setObjeto(categoria);
+					}
+				}
 				producto.setCodigo(codi);
 				producto.setDescripcion(descrip);
 				producto.setPrecioUnitario(prec);
-				producto.setPais(null);
-				producto.setObjeto(null);
 			}
 		}
 		
@@ -121,15 +131,26 @@ public class Main {
 		return null;
 	}	
 	
+	private static categoria getcategoria(String catego) {
+		for(categoria producto : Producto.categoria.values()) {
+			if(Producto.categoria.values().equals(catego)){
+				return producto;
+			}
+		}
+		return null;
+	}
+	
 	
 	public static void mostrar() {
 		int i = 1;
 		int a = 1;
+		System.out.println("*****************Origen de fabricacion***************");
 		for (origenFabricacion  producto : Producto.origenFabricacion.values()) {
 			System.out.println( i + "-" + producto );
 			i++;
 		}
 		System.out.println("---------------------");
+		System.out.println("*****************Categoria***************************");
 		for(categoria categoria : Producto.categoria.values()){
 			System.out.println( a + "-" + categoria );
 			a++;
