@@ -66,12 +66,12 @@ public class Main {
 		double precio = scanner.nextDouble();
 		mostrar();
 		System.out.println("Ingrese origen de fabricacion: ");
-		String orige = scanner.next();
-		origenFabricacion product = getorigenFabricacion(orige);
+		int orige = scanner.nextInt();
+		origenFabricacion origen = getorigenFabricacion(orige);
 		System.out.println("Ingrese categoria del producto: ");
-		String categor = scanner.next();
-		categoria catego = getcategoria(categor);
-		productos.add(new Producto(codigo, descripcion, precio, product, catego));
+		int categor = scanner.nextInt();
+		categoria categoria = getcategoria(categor);
+		productos.add(new Producto(codigo, descripcion, precio, origen, categoria));
 		
 			
 		
@@ -103,13 +103,13 @@ public class Main {
 				int op = scanner.nextInt();
 				if (op == 1) {
 					System.out.println("Ingrese origen de fabricacion: ");
-					String orige = scanner.next();
+					int orige = scanner.nextInt();
 					origenFabricacion product = getorigenFabricacion(orige);
 					producto.setPais(product);
 				}else {
 					if (op == 2) {
 						System.out.println("Ingrese categoria del producto: ");
-						String catego = scanner.next();
+						int catego = scanner.nextInt();
 						categoria categoria = getcategoria(catego);
 						producto.setObjeto(categoria);
 					}
@@ -123,19 +123,23 @@ public class Main {
 	}
 	
 	
-	private static origenFabricacion getorigenFabricacion(String orige) {
-		for(origenFabricacion  producto : Producto.origenFabricacion.values()) {
-			if(Producto.origenFabricacion.values().equals(orige)) {
-				return producto;
+	private static origenFabricacion getorigenFabricacion(int orige) {
+		int tomoPais;
+		for(origenFabricacion  pais : Producto.origenFabricacion.values()) {
+			tomoPais = pais.ordinal();
+			if(tomoPais == orige-1) {
+				return pais;
 			}	
 		}
 		return null;
 	}	
 	 
-	private static categoria getcategoria(String catego) {
-		for(categoria producto : Producto.categoria.values()) {
-			if(Producto.categoria.values().equals(catego)){
-				return producto;
+	private static categoria getcategoria(int catego) {
+		int tomoCategoria;
+		for(categoria categoria : Producto.categoria.values()) {
+			tomoCategoria = categoria.ordinal();
+			if(tomoCategoria == catego-1){
+				return categoria;
 			}
 		}
 		return null;
