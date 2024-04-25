@@ -31,11 +31,11 @@ public class Main {
 			break;
 			case 2:mostrarEfemerides();
 			break;
-			case 3:
+			case 3:eliminarEfemeride();
 			break;
-			case 4:
+			case 4:modificarEfemeride();
 			break;
-			case 5:
+			case 5:System.out.println("Adios");
 			break;	
 			default:
 				System.out.println("Ingrese una opcion correcta");
@@ -43,6 +43,7 @@ public class Main {
 		} while (op != 5);
 	}
 
+	
 	public static void crearEfemeride() {
 		if (efemerides == null) {
 			efemerides= new ArrayList<>();
@@ -51,6 +52,10 @@ public class Main {
 		int codigo = scanner.nextInt();
 		System.out.println("Ingrese mes: ");
 		int mess = scanner.nextInt();
+		if (mess < 1 || mess > 12) {
+			System.out.println("el mes ingresado es incorrecto ingrese nuevamente un mes: ");
+			mess = scanner.nextInt();
+		}
 		Mes meses = obtenerMes(mess);
 		System.out.println("Ingrese dia: ");
 		String dia = scanner.next();
@@ -59,6 +64,7 @@ public class Main {
 		efemerides.add(new Efemeride(codigo, meses, dia, detalle));
 		
 	}
+	
 	
 	private static Mes obtenerMes(int mess) {
 		int meses;
@@ -71,54 +77,59 @@ public class Main {
 		return null;
 	}
 	
+	
 	public static void mostrarEfemerides() {
 		System.out.println("**************************Mostrar efemerides*****************************");
 		efemerides.forEach(m->System.out.println(m));
 	}
 	
 	
+	public static void eliminarEfemeride() {
+		Iterator<Efemeride>iterator= efemerides.iterator();
+		System.out.println("Ingrese codigo a eliminar: ");
+		int codi = scanner.nextInt();
+		while(iterator.hasNext()) {
+			Efemeride efemer = iterator.next();
+			if (efemer.getCodigo() == codi) {
+				iterator.remove();
+			}
+		}
+		System.out.println("Se a eliminado el efemeride");	
+	}
 	
-	/*private static String transformar(int mess) {
-	 String deNumaMes;
-	 	
-		if (mess == 1) {
-			
-		}
-		if (mess == 2) {
-			
-		}
-		if (mess == 3) {
-			
-		}
-		if (mess == 4) {
-			
-		}
-		if (mess == 5) {
-			
-		}
-		if (mess == 6) {
-			
-		}
-		if (mess == 7) {
-			
-		}
-		if (mess == 8) {
-			
-		}
-		if (mess == 9) {
-			
-		}
-		if (mess == 10) {
-			
-		}
-		if (mess == 11) {
-			
-		}
-		if (mess == 12) {
-			
-		}
-		return null;
-	}*/
 	
+	public static void modificarEfemeride() {
+		System.out.println("Ingrese codigo del mes a modificar: ");
+		int codig = scanner.nextInt();
+		System.out.println("Ingrese mes del efemeride a modificar: ");
+		int mess = scanner.nextInt();
+		if (mess < 1 || mess > 12) {
+			System.out.println("el mes ingresado es incorrecto ingrese nuevamente un mes: ");
+			mess = scanner.nextInt();
+		}
+		Mes meses = obtenerMes(mess);
+		for(Efemeride efem : efemerides) {
+			if (efem.getMes().equals(meses) && efem.getCodigo() == codig) {
+				System.out.println("Ingrese nuevo codigo");
+				int nuevoCodigo = scanner.nextInt();
+				System.out.println("Ingrese nuevo mes: ");
+				int nuevoMes = scanner.nextInt();
+				if (nuevoMes < 1 || nuevoMes > 12) {
+					System.out.println("el mes ingresado es incorrecto ingrese nuevamente un mes: ");
+					nuevoMes = scanner.nextInt();
+				}
+				Mes meses1 = obtenerMes(nuevoMes);
+				System.out.println("Ingrese nuevo dia: ");
+				String nuevoDia = scanner.next();
+				System.out.println("Ingrese nuevo detalle");
+				String nuevoDetalle = scanner.next();	
+				efem.setCodigo(nuevoCodigo);
+				efem.setMes(meses);
+				efem.setDia(nuevoDia);
+				efem.setDetalle(nuevoDetalle);
+			}
+			
+		}
+	}
 	
 }
