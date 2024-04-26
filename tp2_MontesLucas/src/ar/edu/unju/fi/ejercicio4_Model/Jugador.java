@@ -8,7 +8,7 @@ import ar.edu.unju.fi.ejercicio4_Constantes.Posicion;
 public class Jugador {
 	String nombre;
 	String apellido;
-	CharSequence fechaNacimiento;
+	String fechaNacimiento;
 	String nacionalidad;
 	float estatura;
 	float peso;
@@ -27,7 +27,7 @@ public class Jugador {
 	
 	}
 	
-	public Jugador(String nombre, String apellido, CharSequence fechaNacimiento, String nacionalidad, float estatura,
+	public Jugador(String nombre, String apellido, String fechaNacimiento, String nacionalidad, float estatura,
 			float peso, Posicion posicion) {
 		super();
 		this.nombre = nombre;
@@ -59,7 +59,7 @@ public class Jugador {
 		return fechaNacimiento;
 	}
 
-	public void setFechaNacimiento(CharSequence fechaNacimiento) {
+	public void setFechaNacimiento(String fechaNacimiento) {
 		this.fechaNacimiento = fechaNacimiento;
 	}
 
