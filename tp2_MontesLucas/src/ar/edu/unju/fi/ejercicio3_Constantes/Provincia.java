@@ -30,10 +30,9 @@ public enum Provincia {
 	public void setSuperficie(double superficie) {
 		this.superficie = superficie;
 	}
-	
 	public double densidadPoblacional() {
-		double cantida = cantidadPoblacion / superficie;
-		return cantida;
+		double densidad = cantidadPoblacion / superficie;
+		return densidad;
 	}
 	
 	
