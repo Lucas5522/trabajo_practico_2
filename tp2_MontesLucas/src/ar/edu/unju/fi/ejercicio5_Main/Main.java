@@ -14,9 +14,9 @@ public class Main {
 	private static Scanner scanner;
 	private static List <Producto>productos;
 	public static void main(String[] args) {
-		
+		scanner = new Scanner(System.in);
 		int op;
-		
+		preCargaProductos();
 		
 		do {
 			System.out.println("1-Mostrar productos");
@@ -26,14 +26,14 @@ public class Main {
 			System.out.println("Ingrese una opcion: ");
 			op =scanner.nextInt();
 			switch (op) {
-			case 1:mostrarProducto();
+			case 1: mostrarProducto();
 			break;
 			case 2:
 			break;
 			case 3:
 			break;
 			default:
-				System.out.println("Ingrese una opcion: ");
+				System.out.println("Opcion incorrecta ");
 			}
 		} while (op != 3);
 			
@@ -61,7 +61,8 @@ public class Main {
 	}
 	
 	public static void mostrarProducto() {
-		productos.forEach(d->System.out.println(d));
+		System.out.println("************************");
+		productos.forEach(p->System.out.println(p));
 		
 		
 	}
