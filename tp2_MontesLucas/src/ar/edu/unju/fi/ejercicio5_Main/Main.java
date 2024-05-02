@@ -13,6 +13,7 @@ import ar.edu.unju.fi.ejercicio5_Model.Producto.origenFabricacion;
 public class Main {
 	private static Scanner scanner;
 	private static List <Producto>productos;
+	private static List <Producto>productosComprados;
 	public static void main(String[] args) {
 		scanner = new Scanner(System.in);
 		int op;
@@ -28,7 +29,7 @@ public class Main {
 			switch (op) {
 			case 1: mostrarProducto();
 			break;
-			case 2:
+			case 2:realizarCompra();
 			break;
 			case 3:
 			break;
@@ -57,7 +58,7 @@ public class Main {
 			productos.add(new Producto(12, "Pico", 48000, origenFabricacion.ARGENTINA, categoria.HERRAMIENTAS , false));
 			productos.add(new Producto(13, "Hacha", 43000, origenFabricacion.ARGENTINA, categoria.HERRAMIENTAS , true));
 			productos.add(new Producto(14, "Licuadora", 90000, origenFabricacion.CHINA, categoria.ELECTROHOGAR , true));
-			productos.add(new Producto(15, "Radio", 18000, origenFabricacion.URUGUAY, categoria.ELECTROHOGAR , false));
+			productos.add(new Producto(15, "Intelpc", 980000, origenFabricacion.URUGUAY, categoria.INFORMACION , false));
 	}
 	
 	public static void mostrarProducto() {
@@ -68,7 +69,51 @@ public class Main {
 	}
 	
 	
-	
+	public static void realizarCompra() {
+		double total = 0;
+		String continuar;
+		do {	
+		
+		if(productosComprados == null) {
+			productosComprados = new ArrayList<>();
+		}
+		System.out.println("Ingrese el codigo del producto a comprar: ");
+		int codigo = scanner.nextInt();
+		for(Producto producto: productos) {
+			if(producto.getCodigo() == codigo) {
+				productosComprados.add(new Producto(producto.getCodigo(), producto.getDescripcion(), 
+													producto.getPrecioUnitario(), producto.getPais(), 
+													producto.getObjeto(), producto.getEstado()));
+				total = total + producto.getPrecioUnitario();
+			}
+		}
+		System.out.println("Desea relaizar otra compra S(s)/N(n) ");
+		continuar = scanner.next();
+		} while (continuar.toUpperCase().equals("S"));
+		System.out.println("1-Pago con tarjeta");
+		System.out.println("1-Pago con efectivo");
+		System.out.println("Ingrese la opcion de pago: ");
+		int op = scanner.nextInt();
+		switch (op) {
+		case 1: 
+		break;
+		case 2:
+		break;
+		default:
+			System.out.println("La opcion elegida es incorrecta; ");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
 	
 	
 		

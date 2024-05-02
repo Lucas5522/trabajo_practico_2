@@ -6,6 +6,9 @@ public class PagoEfectivo {
 	double montoPagado;
 	LocalDate fechaPago;
 	
+	public PagoEfectivo() {
+		
+	}
 	
 	public PagoEfectivo(double montoPagado, LocalDate fechaPago) {
 		super();

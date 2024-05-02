@@ -83,6 +83,9 @@ public class Producto {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	public boolean getEstado() {
+		return estado;
+	}
 
 	@Override
 	public String toString() {
