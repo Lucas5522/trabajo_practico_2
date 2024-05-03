@@ -66,6 +66,7 @@ public class Main {
 			productos.add(new Producto(15, "Intelpc", 980000, origenFabricacion.URUGUAY, categoria.INFORMACION , false));
 	}
 	
+	
 	public static void mostrarProducto() {
 		System.out.println("************************");
 		productos.forEach(p->System.out.println(p));
