@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import ar.edu.unju.fi.ejercicio5_Model.PagoTarjeta;
+import ar.edu.unju.fi.ejercicio5_Model.PagoEfectivo;
 import ar.edu.unju.fi.ejercicio5_Model.Producto;
 import ar.edu.unju.fi.ejercicio5_Model.Producto.categoria;
 import ar.edu.unju.fi.ejercicio5_Model.Producto.origenFabricacion;
@@ -18,8 +20,9 @@ public class Main {
 		scanner = new Scanner(System.in);
 		int op;
 		preCargaProductos();
-		
+		try {
 		do {
+			System.out.println("*************************");
 			System.out.println("1-Mostrar productos");
 			System.out.println("2-Realizar Compra");
 			System.out.println("3-Salir");
@@ -31,13 +34,15 @@ public class Main {
 			break;
 			case 2:realizarCompra();
 			break;
-			case 3:
+			case 3:System.out.println("Adios");
 			break;
 			default:
 				System.out.println("Opcion incorrecta ");
 			}
 		} while (op != 3);
-			
+		} catch (Exception e) {
+			System.out.println("Ingreso incorrecto reinicie");
+		}
 	}
 		
 	public static void preCargaProductos() {
@@ -70,10 +75,11 @@ public class Main {
 	
 	
 	public static void realizarCompra() {
-		double total = 0;
 		String continuar;
+		PagoTarjeta pagoTarjeta = new PagoTarjeta();
+		PagoEfectivo pagoEfectivo = new PagoEfectivo();
+		try {
 		do {	
-		
 		if(productosComprados == null) {
 			productosComprados = new ArrayList<>();
 		}
@@ -84,37 +90,37 @@ public class Main {
 				productosComprados.add(new Producto(producto.getCodigo(), producto.getDescripcion(), 
 													producto.getPrecioUnitario(), producto.getPais(), 
 													producto.getObjeto(), producto.getEstado()));
-				total = total + producto.getPrecioUnitario();
+				pagoTarjeta.realizarPago(producto.getPrecioUnitario());
+				pagoEfectivo.realizarPago(producto.getPrecioUnitario());
 			}
 		}
 		System.out.println("Desea relaizar otra compra S(s)/N(n) ");
 		continuar = scanner.next();
 		} while (continuar.toUpperCase().equals("S"));
+		} catch (Exception e) {
+			System.out.println("Ingreso un codigo de compra incorrecto reinicie  realize de nuevo el procedimiento");
+		}
 		System.out.println("1-Pago con tarjeta");
-		System.out.println("1-Pago con efectivo");
+		System.out.println("2-Pago con efectivo");
 		System.out.println("Ingrese la opcion de pago: ");
 		int op = scanner.nextInt();
+		try {
 		switch (op) {
-		case 1: 
+		case 1: System.out.println("Ingrese numero de tarjeta: ");
+				String numeroTarjet = scanner.next();
+				pagoTarjeta.setNumeroTarjeta(numeroTarjet);
+				pagoTarjeta.imprimirRecibo();
 		break;
 		case 2:
+				pagoEfectivo.imprimirRecibo();
 		break;
 		default:
 			System.out.println("La opcion elegida es incorrecta; ");
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		} catch (Exception e) {
+			System.out.println("Ingreso de opcion incorrecto reinicie");
+		}	
 		
 	}
-	
-	
 		
 }

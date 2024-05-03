@@ -1,22 +1,46 @@
 package ar.edu.unju.fi.ejercicio5_Model;
 
 import java.time.LocalDate;
+import java.util.Scanner;
+
 import ar.edu.unju.fi.ejercicio5_Interfaces.Pago;
 
-public class PagoTarjeta {
+public class PagoTarjeta implements Pago {
+	Scanner scanner = new Scanner(System.in);
 	String numeroTarjeta;
-	LocalDate fechaPago;
+	LocalDate fechaPago = LocalDate.now() ;
 	double montoPagado;
+	@Override
+	public  void realizarPago(double monto) {
+		montoPagado = montoPagado + monto;
+		montoPagado = montoPagado + (montoPagado * 0.1);
+	}
+
+	@Override
+	public void imprimirRecibo() {
+		System.out.println("Numero de tarjeta: " + numeroTarjeta);
+		System.out.println("Fecha de pago: " + fechaPago);
+		System.out.println("Monto pagado: " + montoPagado);
+	}
 	
 	public PagoTarjeta() {
 		
 	}
-	
-	public PagoTarjeta(String numeroTarjeta, LocalDate fechaPago, double montoPagado) {
+
+	public PagoTarjeta(Scanner scanner, String numeroTarjeta, LocalDate fechaPago, double montoPagado) {
 		super();
+		this.scanner = scanner;
 		this.numeroTarjeta = numeroTarjeta;
 		this.fechaPago = fechaPago;
 		this.montoPagado = montoPagado;
+	}
+
+	public Scanner getScanner() {
+		return scanner;
+	}
+
+	public void setScanner(Scanner scanner) {
+		this.scanner = scanner;
 	}
 
 	public String getNumeroTarjeta() {
@@ -42,17 +66,6 @@ public class PagoTarjeta {
 	public void setMontoPagado(double montoPagado) {
 		this.montoPagado = montoPagado;
 	}
-	
-	public class PagoTarjeta implements Pago{
-		
-		public void realizarPago(Double monto) {
-			
-		}
-		
-		
-	}
-	
-	
 	
 	
 	
