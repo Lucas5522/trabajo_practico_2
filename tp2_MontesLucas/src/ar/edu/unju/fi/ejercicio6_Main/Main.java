@@ -7,11 +7,14 @@ import ar.edu.unju.fi.ejercicio6_Model.FelinoSalvaje;
 public class Main {
 
 	public static void main(String[] args) {
-		
-		FelinoDomestico gato = new FelinoDomestico("Tanner", (byte)20, 186f);
-		Converter<FelinoDomestico, FelinoSalvaje>converter = x -> new FelinoSalvaje(x.getNombre(),x.getEdad(), x.getPeso());
-		FelinoSalvaje felino1 = converter.convert(gato);
-		converter.mostrarObjeto(felino1);	
+		FelinoSalvaje gato = new FelinoSalvaje("Tanner", (byte)20, 186f);
+		if (Converter.isNotNull(gato) == true) {
+		Converter<FelinoSalvaje, FelinoDomestico>converter = x -> new FelinoDomestico(x.getNombre(),x.getEdad(), x.getPeso());
+		FelinoDomestico felino1 = converter.convert(gato);
+		converter.mostrarObjeto(felino1);
+		}else {
+			System.out.println("El objeto a convertir es nulo");
+		}
 	}
 
 }
