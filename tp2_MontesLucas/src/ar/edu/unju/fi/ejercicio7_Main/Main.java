@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.ejercicio7_Main;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -43,9 +44,9 @@ public class Main {
 			break;
 			case 4: mostrarElectrohogar();
 			break;
-			case 5:
+			case 5: ordenarProductos();
 			break;
-			case 6:
+			case 6: mostrarProductosMayusculas();
 			break;
 			case 7:System.out.println("Adios");
 			break;
@@ -93,9 +94,6 @@ public class Main {
 	
 	public static void mostrarProductoFaltante() {
 		System.out.println("************************");
-		//No encuentro la manera de que consumer solo muestre los productos verdaderos asi que lo dejo con predicate
-		/*Consumer<Producto>printConsumer = p-> System.out.println(p);
-		productos.forEach(printConsumer);*/
 		Predicate<Producto>fliterEstadoFalse = p -> !p.isEstado();
 		productos.stream().filter(fliterEstadoFalse).forEach(System.out::println);
 		
@@ -104,35 +102,40 @@ public class Main {
 	
 	public static void amuentarPrecio() {
 		Function<Producto, Producto> incrementar = (p) -> {
-			double precioAumentado = p.getPrecioUnitario() + (p.getPrecioUnitario() * 0.2f);
+			double precioAumentado = p.getPrecioUnitario() + (p.getPrecioUnitario()*0.2);
 			p.setPrecioUnitario(precioAumentado);
 			return p;
 		}; 
 		List <Producto> productosIncrementados = new ArrayList<>();
 		productosIncrementados = productos.stream().map(incrementar).collect(Collectors.toList());
+		productosIncrementados.forEach(System.out::println);
 	}
 	
 	
 	public static void mostrarElectrohogar() {
+		System.out.println("************************************************************************************");
 		Predicate<Producto>filterHelectrohogar = p-> p.getObjeto().equals(Producto.categoria.ELECTROHOGAR) && p.isEstado();
 		productos.stream().filter(filterHelectrohogar).forEach(System.out::println);	
 		
 	}
 	
 	
+	public static void ordenarProductos() {
+		System.out.println("**********************************************************");
+		productos.sort(Comparator.comparing(Producto::getPrecioUnitario).reversed());
+		productos.forEach(p->System.out.println(p));	
+	}
 	
 	
+	public static void mostrarProductosMayusculas() {
+		Function<Producto, Producto> mostrarMayusculas = (p) -> {
+			String mayuscula = p.getDescripcion().toUpperCase();
+			p.setDescripcion(mayuscula);
+			return p;
+		}; 
+		List <Producto> productoMayuscula = new ArrayList<>();
+		productoMayuscula = productos.stream().map(mostrarMayusculas).collect(Collectors.toList());
+		productoMayuscula.forEach(System.out::println);		
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
