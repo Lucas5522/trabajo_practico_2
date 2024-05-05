@@ -1,8 +1,13 @@
 package ar.edu.unju.fi.ejercicio7_Main;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ar.edu.unju.fi.ejercicio5_Model.Producto;
 import ar.edu.unju.fi.ejercicio5_Model.Producto.categoria;
@@ -30,13 +35,13 @@ public class Main {
 			System.out.println("Ingrese una opcion: ");
 			op =scanner.nextInt();
 			switch (op) {
-			case 1: 
+			case 1: mostrarProducto();
 			break;
-			case 2:
+			case 2: mostrarProductoFaltante();
 			break;
-			case 3:
+			case 3: amuentarPrecio();
 			break;
-			case 4:
+			case 4: mostrarElectrohogar();
 			break;
 			case 5:
 			break;
@@ -63,7 +68,7 @@ public class Main {
 			productos.add(new Producto(4, "Microondas", 270000, origenFabricacion.BRASIL, categoria.ELECTROHOGAR , true));
 			productos.add(new Producto(5, "Clavos2pg", 120, origenFabricacion.ARGENTINA, categoria.HERRAMIENTAS , false));
 			productos.add(new Producto(6, "Heladera", 525000, origenFabricacion.URUGUAY, categoria.ELECTROHOGAR , true));
-			productos.add(new Producto(7, "Freezer", 15000, origenFabricacion.URUGUAY, categoria.ELECTROHOGAR , true));
+			productos.add(new Producto(7, "Freezer", 15000, origenFabricacion.URUGUAY, categoria.ELECTROHOGAR , false));
 			productos.add(new Producto(8, "Estanteria", 75000, origenFabricacion.ARGENTINA, categoria.HERRAMIENTAS , false));
 			productos.add(new Producto(9, "Galaxy_a04", 690000, origenFabricacion.CHINA, categoria.TELEFONO , true));
 			productos.add(new Producto(10, "Aplanadora", 360000, origenFabricacion.BRASIL, categoria.HERRAMIENTAS , false));
@@ -75,16 +80,44 @@ public class Main {
 	}
 	
 	
+	public static void mostrarProducto() {
+		System.out.println("************************");
+		//No encuentro la manera de que consumer solo muestre los productos verdaderos asi que lo dejo con predicate
+		/*Consumer<Producto>printConsumer = p-> System.out.println(p);
+		productos.forEach(printConsumer);*/
+		Predicate<Producto>fliterEstadoTrue = p -> p.isEstado();
+		productos.stream().filter(fliterEstadoTrue).forEach(System.out::println);
+		
+	}
 	
 	
+	public static void mostrarProductoFaltante() {
+		System.out.println("************************");
+		//No encuentro la manera de que consumer solo muestre los productos verdaderos asi que lo dejo con predicate
+		/*Consumer<Producto>printConsumer = p-> System.out.println(p);
+		productos.forEach(printConsumer);*/
+		Predicate<Producto>fliterEstadoFalse = p -> !p.isEstado();
+		productos.stream().filter(fliterEstadoFalse).forEach(System.out::println);
+		
+	}
 	
 	
+	public static void amuentarPrecio() {
+		Function<Producto, Producto> incrementar = (p) -> {
+			double precioAumentado = p.getPrecioUnitario() + (p.getPrecioUnitario() * 0.2f);
+			p.setPrecioUnitario(precioAumentado);
+			return p;
+		}; 
+		List <Producto> productosIncrementados = new ArrayList<>();
+		productosIncrementados = productos.stream().map(incrementar).collect(Collectors.toList());
+	}
 	
 	
-	
-	
-	
-	
+	public static void mostrarElectrohogar() {
+		Predicate<Producto>filterHelectrohogar = p-> p.getObjeto().equals(Producto.categoria.ELECTROHOGAR) && p.isEstado();
+		productos.stream().filter(filterHelectrohogar).forEach(System.out::println);	
+		
+	}
 	
 	
 	
